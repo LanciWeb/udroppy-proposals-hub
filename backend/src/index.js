@@ -4,6 +4,13 @@ const bodyParser = require('body-parser');
 const cors = require('cors');
 const helmet = require('helmet');
 const morgan = require('morgan');
+const mongoose = require('mongoose');
+const keys = require('../config/keys');
+require('../models/Proposal');
+const Proposal = mongoose.model('proposals');
+
+//#database connection
+mongoose.connect(keys.mongoUri, { useNewUrlParser: true });
 
 const app = express();
 
@@ -13,17 +20,13 @@ app.use(bodyParser.json());
 app.use(cors());
 app.use(morgan('combined'));
 
+// require('../routes');
+
 //#routes
 // retrieve all proposals
-app.get('/', (req, res) => {
-  //TODO take proposals from database
-  const ps = proposals.map(p => ({
-    id: p.id,
-    title: p.title,
-    description: p.description,
-    answers: p.answers.length
-  }));
-  res.send(ps);
+app.get('/', async (req, res) => {
+  const proposals = await Proposal.find({}).sort({ _id: -1 });
+  res.send(proposals);
 });
 
 // get a specific proposal
