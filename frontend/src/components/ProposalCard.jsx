@@ -11,7 +11,7 @@ const ProposalCard = props => {
     const { _id } = proposal;
     const apiUrl = process.env.API_URL || 'http://localhost:8081';
     const result = await axios.patch(apiUrl + `/proposals/${_id}/like`);
-    const likes = result.data;
+    const likes = result.data.likes;
     setLikes(likes);
   };
 

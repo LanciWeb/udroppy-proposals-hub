@@ -20,13 +20,13 @@ export default function Dashboard() {
 
   const renderProposals = () =>
     proposals.map(p => (
-      <Col md="4" lg="3" key={p._id}>
+      <Col sm="6" lg="4" key={p._id}>
         <ProposalCard proposal={p} />
       </Col>
     ));
 
   return (
-    <Container>
+    <Container fluid>
       <Row>
         {proposals === null && <Loader />}
         {proposals && renderProposals()}
