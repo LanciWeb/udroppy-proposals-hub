@@ -1,23 +1,30 @@
-import Loader from './Loader';
+import axios from 'axios';
 import {
   Row,
   Col,
   Card,
-  Container,
+  CardText,
   CardBody,
+  CardTitle,
+  Container,
   CardHeader,
-  CardFooter,
-  CardText
+  CardFooter
 } from 'reactstrap';
+import Loader from './Loader';
+import { Link } from 'react-router-dom';
 import React, { useState, useEffect } from 'react';
 
 export default function Dashboard() {
   const [proposals, setProposals] = useState(null);
 
   // fetches proposals at mount
-  useEffect(async () => {
-    const proposals = (await axios.get('http://localhost:8081/')).data;
-    setProposals(proposals);
+  useEffect(() => {
+    async function fetchProposals() {
+      const response = await axios.get('http://localhost:8081/proposals');
+      const proposals = response.data;
+      setProposals(proposals);
+    }
+    fetchProposals();
   }, []);
 
   const renderProposals = () =>
