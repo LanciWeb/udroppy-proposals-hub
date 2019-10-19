@@ -1,9 +1,15 @@
 import React from 'react';
-import { Route } from 'react-router-dom';
 import Navbar from './components/Navbar';
+import Loader from './components/Loader';
+import { Route } from 'react-router-dom';
 import Dashboard from './components/Dashboard';
+import { useAuth0 } from './auth/react-auth0-spa';
 
 function App() {
+  const { loading } = useAuth0();
+  if (loading) {
+    return <Loader />;
+  }
   return (
     <div className="App">
       <Navbar />
