@@ -51,10 +51,9 @@ module.exports = app => {
     try {
       const proposal = await Proposal.findOne({ _id: req.params.id });
       if (!proposal) return res.status(404).send();
-
       proposal.likes += 1;
       await proposal.save();
-      res.status(204).send();
+      res.status(200).send(proposal.likes);
     } catch (e) {
       console.error(e);
       throw new Error(e);

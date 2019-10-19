@@ -1,6 +1,6 @@
-import './index.css';
 import App from './App';
 import React from 'react';
+import './scss/index.scss';
 import ReactDOM from 'react-dom';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { BrowserRouter } from 'react-router-dom';
