@@ -10,10 +10,11 @@ import {
   CardText
 } from 'reactstrap';
 import React, { useState, useEffect } from 'react';
-export default function ProposalsPage() {
+
+export default function Dashboard() {
   const [proposals, setProposals] = useState(null);
 
-  // fetch proposals at mount
+  // fetches proposals at mount
   useEffect(async () => {
     const proposals = (await axios.get('http://localhost:8081/')).data;
     setProposals(proposals);
