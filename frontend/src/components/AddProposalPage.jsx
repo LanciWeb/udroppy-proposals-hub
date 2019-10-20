@@ -15,6 +15,7 @@ import {
 import axios from 'axios';
 import React, { useState } from 'react';
 import { withRouter } from 'react-router-dom';
+import { useAuth0 } from '../auth/Auth0Provider';
 
 const AddProposalPage = props => {
   const initialProposal = {
@@ -23,6 +24,7 @@ const AddProposalPage = props => {
     what: '',
     why: ''
   };
+  const { getTokenSilently, user } = useAuth0();
   const [disabled, setDisabled] = useState(false);
   const [proposal, setProposal] = useState(initialProposal);
 
@@ -44,12 +46,25 @@ const AddProposalPage = props => {
     setDisabled(true);
     const isValid = validateForm();
     if (isValid) {
-      const apiUrl = process.env.API_URL || 'http://localhost:8081';
-      await axios.post(apiUrl + '/proposals', { ...proposal });
+      await postProposal();
       props.history.push('/');
     }
     setDisabled(false);
     return;
+  };
+
+  const postProposal = async () => {
+    const token = await getTokenSilently();
+    const apiUrl = process.env.API_URL || 'http://localhost:8081';
+    await axios.post(
+      apiUrl + '/proposals',
+      { ...proposal, proposer: user.nickname, proposerPic: user.picture },
+      {
+        headers: {
+          Authorization: `Bearer ${token}`
+        }
+      }
+    );
   };
 
   return (
