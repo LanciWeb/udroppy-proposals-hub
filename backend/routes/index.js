@@ -54,7 +54,6 @@ module.exports = app => {
     try {
       const proposal = await Proposal.findOne({ _id: req.params.id });
       if (!proposal) return res.status(404).send();
-      console.log(req);
       if (proposal.user.sub !== req.user.sub) return res.status(401).send();
       await proposal.remove();
       res.status(204).send();
