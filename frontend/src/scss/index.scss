@@ -1,3 +1,8 @@
+$primary: #f7941e;
+
+$shadow: 0 8px 10px -5px rgba(0, 0, 0, 0.2), 0 15px 25px 2px rgba(0, 0, 0, 0.14),
+  0 5px 30px 5px rgba(0, 0, 0, 0.12);
+
 body {
   margin: 0;
   background-size: cover;
@@ -28,16 +33,14 @@ code {
   position: fixed;
   top: 0;
   left: 0;
-  z-index: 9999;
-  height: 100%;
   width: 100%;
+  height: 100%;
+  z-index: 9999;
+  background-color: white;
   background-repeat: no-repeat;
   background-attachment: fixed;
   background-position: center center;
   background-image: url('../assets/img/logo.gif');
-}
-
-#dashboard {
 }
 
 img[alt='profile'] {
@@ -45,16 +48,60 @@ img[alt='profile'] {
 }
 
 .card {
+  box-shadow: $shadow;
+  background-color: white;
   border-radius: 20px !important;
-  box-shadow: 0 8px 10px -5px rgba(0, 0, 0, 0.2),
-    0 15px 25px 2px rgba(0, 0, 0, 0.14), 0 5px 30px 5px rgba(0, 0, 0, 0.12);
-  background-color: #fff;
   .card-header {
     background-color: white;
-    border-radius: 20px 20px 0 0;
+    border-radius: 20px 20px 0 0 !important;
   }
   .card-footer {
     background-color: white;
-    border-radius: 0 0 20px 20px;
+    border-radius: 0 0 20px 20px !important;
+  }
+}
+
+.dropdown {
+  a {
+    color: #212529;
+    &:hover {
+      color: $primary;
+      text-decoration: none;
+    }
+  }
+  .dropdown-item:hover {
+    color: $primary;
+  }
+}
+
+#add-propose-button {
+  width: 60px;
+  right: 50px;
+  height: 60px;
+  bottom: 50px;
+  display: flex;
+  color: black;
+  position: fixed;
+  border-radius: 50%;
+  box-shadow: $shadow;
+  align-items: center;
+  justify-content: center;
+  background-color: white;
+  &:hover {
+    color: $primary;
+  }
+}
+
+#submit-proposal-button {
+  color: white;
+  border-radius: 20px;
+  box-shadow: $shadow;
+  border-color: transparent;
+  background-color: $primary;
+  &:hover {
+    opacity: 0.8;
+  }
+  &:active {
+    box-shadow: none;
   }
 }

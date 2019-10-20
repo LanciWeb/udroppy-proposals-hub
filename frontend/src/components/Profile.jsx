@@ -5,6 +5,7 @@ import {
   UncontrolledDropdown
 } from 'reactstrap';
 import React from 'react';
+import { Link } from 'react-router-dom';
 import { useAuth0 } from '../auth/Auth0Provider';
 
 const Profile = () => {
@@ -27,6 +28,11 @@ const Profile = () => {
       </DropdownToggle>
 
       <DropdownMenu right>
+        <DropdownItem onClick={() => logout()}>
+          <Link to="/propose">
+            <i className="fas fa-plus" /> New Proposal
+          </Link>
+        </DropdownItem>
         <DropdownItem onClick={() => logout()}>
           <i className="fas fa-sign-out-alt" /> Log out
         </DropdownItem>

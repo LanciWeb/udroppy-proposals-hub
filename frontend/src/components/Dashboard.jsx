@@ -1,5 +1,6 @@
 import axios from 'axios';
 import Loader from './Loader';
+import { Link } from 'react-router-dom';
 import ProposalCard from './ProposalCard';
 import { Row, Col, Container } from 'reactstrap';
 import React, { useState, useEffect } from 'react';
@@ -31,6 +32,9 @@ export default function Dashboard() {
         {proposals === null && <Loader />}
         {proposals && renderProposals()}
       </Row>
+      <Link to="/propose" className="btn" id="add-propose-button">
+        <i className="fas fa-plus fa-2x" />
+      </Link>
     </Container>
   );
 }
