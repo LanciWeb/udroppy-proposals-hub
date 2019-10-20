@@ -58,7 +58,7 @@ const AddProposalPage = props => {
     const apiUrl = process.env.API_URL || 'http://localhost:8081';
     await axios.post(
       apiUrl + '/proposals',
-      { ...proposal, proposer: user.nickname, proposerPic: user.picture },
+      { ...proposal, user },
       {
         headers: {
           Authorization: `Bearer ${token}`
@@ -147,9 +147,9 @@ const AddProposalPage = props => {
               <Button
                 type="button"
                 disabled={disabled}
-                className="btn my-2"
-                onClick={submitProposal}
+                className="btn  my-2"
                 id="submit-proposal-button"
+                onClick={submitProposal}
               >
                 Submit Proposal
               </Button>

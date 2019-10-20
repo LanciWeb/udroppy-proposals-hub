@@ -10,19 +10,19 @@ export default function Dashboard() {
   const { getTokenSilently } = useAuth0();
   const [proposals, setProposals] = useState(null);
 
+  async function fetchProposals() {
+    const token = await getTokenSilently();
+    const apiUrl = process.env.API_URL || 'http://localhost:8081';
+    const response = await axios.get(apiUrl + '/proposals', {
+      headers: {
+        Authorization: `Bearer ${token}`
+      }
+    });
+    const proposals = response.data;
+    setProposals(proposals);
+  }
   // fetches proposals at mount
   useEffect(() => {
-    async function fetchProposals() {
-      const token = await getTokenSilently();
-      const apiUrl = process.env.API_URL || 'http://localhost:8081';
-      const response = await axios.get(apiUrl + '/proposals', {
-        headers: {
-          Authorization: `Bearer ${token}`
-        }
-      });
-      const proposals = response.data;
-      setProposals(proposals);
-    }
     fetchProposals();
   }, [getTokenSilently]);
 

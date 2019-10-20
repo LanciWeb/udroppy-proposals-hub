@@ -49,20 +49,34 @@ module.exports = app => {
     }
   });
 
+  // delete a specific proposal
+  app.delete('/proposals/:id', checkJwt, async (req, res) => {
+    try {
+      const proposal = await Proposal.findOne({ _id: req.params.id });
+      if (!proposal) return res.status(404).send();
+      console.log(req);
+      if (proposal.user.sub !== req.user.sub) return res.status(401).send();
+      await proposal.remove();
+      res.status(204).send();
+    } catch (e) {
+      console.error(e);
+      throw new Error(e);
+    }
+  });
+
   // insert a new proposal
   app.post('/proposals', checkJwt, async (req, res) => {
-    const { who, what, why, title, proposer, proposerPic } = req.body;
+    const { who, what, why, title, proposer, user } = req.body;
     console.log(req);
     try {
       await new Proposal({
         who,
         why,
         what,
+        user,
         title,
         likes: 0,
-        time: new Date(),
-        proposerPic: proposerPic,
-        proposer: proposer || 'anonymous'
+        time: new Date()
       }).save();
 
       res.status(201).send();

@@ -5,8 +5,7 @@ const proposalSchema = new Schema({
   title: String,
   time: Date,
   likes: Number,
-  proposer: String,
-  proposerPic: String,
+  user: Object,
   who: String,
   what: String,
   why: String

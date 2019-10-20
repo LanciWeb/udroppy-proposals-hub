@@ -2,11 +2,12 @@ import axios from 'axios';
 import PropTypes from 'prop-types';
 import React, { useState } from 'react';
 import { useAuth0 } from '../auth/Auth0Provider';
+import DeleteProposalButton from './buttons/DeleteProposalButton';
 import { Card, CardText, CardBody, CardFooter, CardHeader } from 'reactstrap';
 
 const ProposalCard = props => {
   const { proposal } = props;
-  const { getTokenSilently } = useAuth0();
+  const { user, getTokenSilently } = useAuth0();
   const [likes, setLikes] = useState(undefined);
 
   const incrementLike = async () => {
@@ -51,17 +52,24 @@ const ProposalCard = props => {
           {proposal.why}
         </CardText>
       </CardBody>
-      <CardFooter className="text-right">
-        <em>Proposed by: </em>
-        {proposal.proposerPic && (
-          <img
-            height="40"
-            alt="profile"
-            src={proposal.proposerPic}
-            className="image-fluid mr-1"
-          />
-        )}
-        {proposal.proposer}
+      <CardFooter className="d-flex justify-content-between align-items-center">
+        <span>
+          {proposal.user.sub === user.sub && (
+            <DeleteProposalButton proposal={proposal} />
+          )}
+        </span>
+        <span>
+          <em>Proposed by: </em>
+          {proposal.user.picture && (
+            <img
+              height="40"
+              alt="profile"
+              src={proposal.user.picture}
+              className="image-fluid mr-1"
+            />
+          )}
+          {proposal.user.nickname}
+        </span>
       </CardFooter>
     </Card>
   );
@@ -73,8 +81,8 @@ ProposalCard.propTypes = {
     who: PropTypes.string,
     why: PropTypes.string,
     what: PropTypes.string,
-    likes: PropTypes.number,
-    proposer: PropTypes.string
+    user: PropTypes.object,
+    likes: PropTypes.number
   })
 };
 
