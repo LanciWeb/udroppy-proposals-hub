@@ -18,8 +18,11 @@ const ProposalCard = props => {
   return (
     <Card className="proposal text-dark mb-3">
       <CardHeader className="d-flex justify-content-between">
-        <span>Likes: {likes || proposal.likes}</span>
-        <i className="fas fa-thumbs-up" onClick={incrementLike} />
+        <span className="h5">{proposal.title}</span>
+        <span className="d-flex align-items-center">
+          <span>{likes || proposal.likes}</span>
+          <i className="fas fa-thumbs-up ml-2" onClick={incrementLike} />
+        </span>
       </CardHeader>
       <CardBody>
         <CardText>
