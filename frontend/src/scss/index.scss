@@ -90,6 +90,9 @@ img[alt='profile'] {
   &:hover {
     color: $primary;
   }
+  &:active {
+    box-shadow: none;
+  }
 }
 
 #submit-proposal-button {

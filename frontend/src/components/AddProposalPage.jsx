@@ -14,13 +14,43 @@ import {
 } from 'reactstrap';
 import axios from 'axios';
 import React, { useState } from 'react';
+import { withRouter } from 'react-router-dom';
 
-const AddProposalPage = () => {
+const AddProposalPage = props => {
+  const initialProposal = {
+    title: '',
+    who: '',
+    what: '',
+    why: ''
+  };
   const [disabled, setDisabled] = useState(false);
+  const [proposal, setProposal] = useState(initialProposal);
 
-  const updateValue = e => {};
+  const updateValue = e => {
+    const { name, value } = e.target;
+    const updatedProposal = { ...proposal, [name]: value };
+    setProposal(updatedProposal);
+  };
 
-  const submitProposal = () => {};
+  const validateForm = () => {
+    let isValid = true;
+    Object.keys(proposal).forEach(k => {
+      if (proposal[k] === '') isValid = false;
+    });
+    return isValid;
+  };
+
+  const submitProposal = async () => {
+    setDisabled(true);
+    const isValid = validateForm();
+    if (isValid) {
+      const apiUrl = process.env.API_URL || 'http://localhost:8081';
+      await axios.post(apiUrl + '/proposals', { ...proposal });
+      props.history.push('/');
+    }
+    setDisabled(false);
+    return;
+  };
 
   return (
     <Container>
@@ -36,9 +66,10 @@ const AddProposalPage = () => {
                   Title
                 </Label>
                 <Input
+                  required
                   type="text"
-                  name="title"
                   id="title"
+                  name="title"
                   onBlur={updateValue}
                 />
                 <FormText color="muted">
@@ -49,7 +80,13 @@ const AddProposalPage = () => {
                 <Label for="who" className="h4">
                   Who
                 </Label>
-                <Input type="text" name="who" id="who" onBlur={updateValue} />
+                <Input
+                  required
+                  type="text"
+                  name="who"
+                  id="who"
+                  onBlur={updateValue}
+                />
                 <FormText color="muted">
                   Specify which kind of user is going to benefit from your
                   proposal.
@@ -65,6 +102,7 @@ const AddProposalPage = () => {
                 </Label>
                 <Input
                   rows="5"
+                  required
                   id="what"
                   name="what"
                   type="textarea"
@@ -77,6 +115,7 @@ const AddProposalPage = () => {
                   Why
                 </Label>
                 <Input
+                  required
                   rows="5"
                   id="why"
                   name="why"
@@ -107,4 +146,4 @@ const AddProposalPage = () => {
   );
 };
 
-export default AddProposalPage;
+export default withRouter(AddProposalPage);

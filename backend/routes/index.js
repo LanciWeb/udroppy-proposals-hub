@@ -28,7 +28,7 @@ module.exports = app => {
 
   // insert a new proposal
   app.post('/proposals', async (req, res) => {
-    const { who, what, why } = req.body;
+    const { who, what, why, title } = req.body;
     try {
       await new Proposal({
         who,
