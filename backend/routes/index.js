@@ -34,6 +34,7 @@ module.exports = app => {
         who,
         why,
         what,
+        title,
         likes: 0,
         time: new Date(),
         proposer: 'Anonymus'

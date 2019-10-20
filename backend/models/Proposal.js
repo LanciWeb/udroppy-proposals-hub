@@ -2,6 +2,7 @@ const mongoose = require('mongoose');
 const { Schema } = mongoose;
 
 const proposalSchema = new Schema({
+  title: String,
   time: Date,
   likes: Number,
   proposer: String,
