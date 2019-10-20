@@ -25,6 +25,7 @@ const DeleteProposalButton = props => {
     } catch (e) {
       alert(e);
     } finally {
+      props.reloadProposals();
       setLoading(false);
       setModal(false);
     }
@@ -69,7 +70,8 @@ DeleteProposalButton.propTypes = {
     what: PropTypes.string,
     user: PropTypes.object,
     likes: PropTypes.number
-  })
+  }),
+  reloadProposals: PropTypes.func
 };
 
 export default DeleteProposalButton;

@@ -55,7 +55,10 @@ const ProposalCard = props => {
       <CardFooter className="d-flex justify-content-between align-items-center">
         <span>
           {proposal.user.sub === user.sub && (
-            <DeleteProposalButton proposal={proposal} />
+            <DeleteProposalButton
+              proposal={proposal}
+              reloadProposals={props.reloadProposals}
+            />
           )}
         </span>
         <span>
@@ -83,7 +86,8 @@ ProposalCard.propTypes = {
     what: PropTypes.string,
     user: PropTypes.object,
     likes: PropTypes.number
-  })
+  }),
+  reloadProposals: PropTypes.func
 };
 
 export default ProposalCard;

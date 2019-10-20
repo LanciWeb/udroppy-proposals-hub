@@ -29,7 +29,7 @@ export default function Dashboard() {
   const renderProposals = () =>
     proposals.map(p => (
       <Col sm="6" lg="4" key={p._id} className="mb-4">
-        <ProposalCard proposal={p} />
+        <ProposalCard proposal={p} reloadProposals={fetchProposals} />
       </Col>
     ));
 
