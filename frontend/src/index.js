@@ -6,7 +6,7 @@ import config from './auth/auth_config.json';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { BrowserRouter } from 'react-router-dom';
 import * as serviceWorker from './serviceWorker';
-import { Auth0Provider } from './auth/react-auth0-spa';
+import { Auth0Provider } from './auth/Auth0Provider';
 
 // A function that routes the user to the right place
 // after login

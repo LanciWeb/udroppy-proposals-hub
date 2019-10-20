@@ -1,9 +1,10 @@
 import React from 'react';
 import Navbar from './components/Navbar';
 import Loader from './components/Loader';
-import { Route } from 'react-router-dom';
+import { Switch } from 'react-router-dom';
 import Dashboard from './components/Dashboard';
-import { useAuth0 } from './auth/react-auth0-spa';
+import PrivateRoute from './auth/ProtectedRoute';
+import { useAuth0 } from './auth/Auth0Provider';
 
 function App() {
   const { loading } = useAuth0();
@@ -12,8 +13,12 @@ function App() {
   }
   return (
     <div className="App">
-      <Navbar />
-      <Route exact path="/" component={Dashboard} />
+      <header>
+        <Navbar />
+      </header>
+      <Switch>
+        <PrivateRoute exact path="/" component={Dashboard} />
+      </Switch>
     </div>
   );
 }

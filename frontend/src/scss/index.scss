@@ -1,11 +1,15 @@
 body {
   margin: 0;
+  background-size: cover;
   margin-top: 100px !important;
+  background-attachment: fixed;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
     'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  background-image: url('https://app-ea.udroppy.com/assets/img/background/background_mobile.jpg');
+  // background-image: url('https://app-ea.udroppy.com/assets/img/background/background_login_orange.jpg');
 }
 
 code {
@@ -31,4 +35,26 @@ code {
   background-attachment: fixed;
   background-position: center center;
   background-image: url('../assets/img/logo.gif');
+}
+
+#dashboard {
+}
+
+img[alt='profile'] {
+  border-radius: 50%;
+}
+
+.card {
+  border-radius: 20px !important;
+  box-shadow: 0 8px 10px -5px rgba(0, 0, 0, 0.2),
+    0 15px 25px 2px rgba(0, 0, 0, 0.14), 0 5px 30px 5px rgba(0, 0, 0, 0.12);
+  background-color: #fff;
+  .card-header {
+    background-color: white;
+    border-radius: 20px 20px 0 0;
+  }
+  .card-footer {
+    background-color: white;
+    border-radius: 0 0 20px 20px;
+  }
 }

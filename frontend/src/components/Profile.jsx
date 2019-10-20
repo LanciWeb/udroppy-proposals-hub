@@ -5,7 +5,7 @@ import {
   UncontrolledDropdown
 } from 'reactstrap';
 import React from 'react';
-import { useAuth0 } from '../auth/react-auth0-spa';
+import { useAuth0 } from '../auth/Auth0Provider';
 
 const Profile = () => {
   const { loading, user, logout } = useAuth0();
@@ -17,7 +17,12 @@ const Profile = () => {
   return (
     <UncontrolledDropdown nav inNavbar>
       <DropdownToggle nav caret>
-        <img src={user.picture} height="40" className="image-fluid mr-1" />
+        <img
+          height="40"
+          alt="profile"
+          src={user.picture}
+          className="image-fluid mr-1"
+        />
         {user.nickname}
       </DropdownToggle>
 

@@ -9,7 +9,7 @@ import {
 } from 'reactstrap';
 import Profile from './Profile';
 import React, { useState } from 'react';
-import { useAuth0 } from '../auth/react-auth0-spa';
+import { useAuth0 } from '../auth/Auth0Provider';
 
 export default () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -18,7 +18,7 @@ export default () => {
   const toggle = () => setIsOpen(!isOpen);
 
   return (
-    <Navbar color="dark" dark expand="md" className="fixed-top">
+    <Navbar color="dark" dark expand="md" className="fixed-top py-0">
       <NavbarBrand href="/">
         <img
           width="40"

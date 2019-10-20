@@ -16,7 +16,7 @@ const ProposalCard = props => {
   };
 
   return (
-    <Card className="proposal text-dark bg-warning mb-3">
+    <Card className="proposal text-dark mb-3">
       <CardHeader className="d-flex justify-content-between">
         <span>Likes: {likes || proposal.likes}</span>
         <i className="fas fa-thumbs-up" onClick={incrementLike} />
@@ -41,7 +41,7 @@ const ProposalCard = props => {
           {proposal.why}
         </CardText>
       </CardBody>
-      <CardFooter>
+      <CardFooter className="text-right">
         <em>Proposed by: </em>
         {proposal.proposer}
       </CardFooter>

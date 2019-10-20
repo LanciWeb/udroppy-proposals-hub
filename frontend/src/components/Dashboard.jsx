@@ -26,7 +26,7 @@ export default function Dashboard() {
     ));
 
   return (
-    <Container fluid>
+    <Container fluid id="dashboard">
       <Row>
         {proposals === null && <Loader />}
         {proposals && renderProposals()}
