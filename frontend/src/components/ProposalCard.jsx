@@ -10,7 +10,11 @@ const ProposalCard = props => {
   const { user, getTokenSilently } = useAuth0();
   const [likes, setLikes] = useState(undefined);
 
+  const isProposalOwner = proposal.user.sub === user.sub;
+
   const incrementLike = async () => {
+    if (isProposalOwner) return;
+
     const { _id } = proposal;
     const token = await getTokenSilently();
     const apiUrl = process.env.API_URL || 'http://localhost:8081';
@@ -27,9 +31,14 @@ const ProposalCard = props => {
     <Card className="proposal text-dark mb-4 h-100">
       <CardHeader className="d-flex justify-content-between">
         <span className="h5">{proposal.title}</span>
-        <span className="d-flex align-items-center">
+        <span className={`d-flex align-items-center`}>
           <span>{likes || proposal.likes}</span>
-          <i className="fas fa-thumbs-up ml-2" onClick={incrementLike} />
+          <i
+            className={`fas fa-thumbs-up ml-2 ${
+              isProposalOwner ? 'not-allowed' : 'clickable'
+            }`}
+            onClick={incrementLike}
+          />
         </span>
       </CardHeader>
       <CardBody>
@@ -54,7 +63,7 @@ const ProposalCard = props => {
       </CardBody>
       <CardFooter className="d-flex justify-content-between align-items-center">
         <span>
-          {proposal.user.sub === user.sub && (
+          {isProposalOwner && (
             <DeleteProposalButton
               proposal={proposal}
               reloadProposals={props.reloadProposals}

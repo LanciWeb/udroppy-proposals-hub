@@ -90,6 +90,7 @@ module.exports = app => {
     try {
       const proposal = await Proposal.findOne({ _id: req.params.id });
       if (!proposal) return res.status(404).send();
+      if (proposal.user.sub === req.user.sub) return res.status(401).send();
       proposal.likes += 1;
       await proposal.save();
       res.status(200).send({ likes: proposal.likes });
