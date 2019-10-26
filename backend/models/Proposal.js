@@ -1,13 +1,16 @@
 const mongoose = require('mongoose');
 const { Schema } = mongoose;
+const { CommentSchema } = require('./Comment');
 
 const proposalSchema = new Schema({
-  title: String,
   time: Date,
-  likes: Number,
-  user: Object,
+  why: String,
   who: String,
   what: String,
-  why: String
+  user: Object,
+  likes: Number,
+  title: String,
+  comments: [CommentSchema]
 });
+
 mongoose.model('proposals', proposalSchema);
