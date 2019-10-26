@@ -1,5 +1,6 @@
 import axios from 'axios';
 import PropTypes from 'prop-types';
+import { Link } from 'react-router-dom';
 import React, { useState } from 'react';
 import { useAuth0 } from '../auth/Auth0Provider';
 import DeleteProposalButton from './buttons/DeleteProposalButton';
@@ -69,6 +70,10 @@ const ProposalCard = props => {
               reloadProposals={props.reloadProposals}
             />
           )}
+          <Link to={'/'}>
+            <i className={`fas fa-comments mr-2`} />
+          </Link>
+          <span>0</span>
         </span>
         <span>
           <em>Proposed by: </em>

@@ -34,7 +34,7 @@ const DeleteProposalButton = props => {
   if (loading) return <Loader />;
 
   return (
-    <div>
+    <span>
       <i
         className="fa fa-times text-danger clickable"
         onClick={() => setModal(true)}
@@ -58,7 +58,7 @@ const DeleteProposalButton = props => {
           </Button>
         </ModalFooter>
       </Modal>
-    </div>
+    </span>
   );
 };
 
