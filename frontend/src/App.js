@@ -5,6 +5,7 @@ import { Switch } from 'react-router-dom';
 import Dashboard from './components/Dashboard';
 import { useAuth0 } from './auth/Auth0Provider';
 import PrivateRoute from './auth/ProtectedRoute';
+import AddCommentPage from './components/AddCommentPage';
 import AddProposalPage from './components/AddProposalPage';
 
 function App() {
@@ -20,6 +21,7 @@ function App() {
       <Switch>
         <PrivateRoute exact path="/" component={Dashboard} />
         <PrivateRoute exact path="/propose" component={AddProposalPage} />
+        <PrivateRoute exact path="/proposals/:id" component={AddCommentPage} />
       </Switch>
     </div>
   );

@@ -70,7 +70,7 @@ const ProposalCard = props => {
               reloadProposals={props.reloadProposals}
             />
           )}
-          <Link to={'/'}>
+          <Link to={'/proposals/' + proposal._id}>
             <i className={`fas fa-comments mr-2`} />
           </Link>
           <span>0</span>
