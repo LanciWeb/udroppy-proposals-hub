@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 const { Schema } = mongoose;
-const { CommentSchema } = require('./Comment');
+const CommentSchema = require('./Comment');
 
 const proposalSchema = new Schema({
   time: Date,
