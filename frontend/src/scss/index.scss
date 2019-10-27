@@ -111,7 +111,8 @@ img[alt='profile'] {
   background-color: $primary;
 }
 
-#submit-proposal-button {
+#submit-proposal-button,
+#submit-comment-button {
   @extend .orange-button;
   @extend .rounded-button;
 }
@@ -134,4 +135,12 @@ img[alt='profile'] {
 
 .not-allowed {
   cursor: not-allowed;
+}
+
+#comment-wrapper {
+  // overflow: scroll;
+  min-height: 150px;
+  max-height: 500px;
+  border-radius: 10px;
+  background-color: #dedede;
 }

@@ -2,13 +2,15 @@ import {
   Row,
   Col,
   Card,
+  CardBody,
+  CardText,
   Container,
   CardHeader,
-  CardBody,
   CardFooter
 } from 'reactstrap';
 import axios from 'axios';
 import Loader from './Loader';
+import AddCommentForm from './AddCommentForm';
 import { useAuth0 } from '../auth/Auth0Provider';
 import React, { useState, useEffect } from 'react';
 
@@ -29,6 +31,11 @@ const AddCommentPage = props => {
     setProposal(proposal);
   };
 
+  const reloadComments = () => {
+    //TODO add api call to refetch the comments
+    alert('reloadComments!');
+  };
+
   // eslint-disable-next-line react-hooks/exhaustive-deps
   useEffect(() => {
     getProposal();
@@ -40,10 +47,41 @@ const AddCommentPage = props => {
     <Container>
       <Row>
         <Col>
-          <Card>
-            <CardHeader>Add Comment to [Proposal Title]</CardHeader>
-            <CardBody>ALL other fields all other comments</CardBody>
-            <CardFooter>textarea with comment forms</CardFooter>
+          <Card className="h-100">
+            <CardHeader>
+              <h3>{proposal.title}</h3>
+            </CardHeader>
+            <CardBody>
+              <CardText>
+                <em>
+                  <strong>Who: </strong>
+                </em>
+                {proposal.who}
+              </CardText>
+              <CardText>
+                <em>
+                  <strong>What: </strong>
+                </em>
+                {proposal.what}
+              </CardText>
+              <em>
+                <em>
+                  <strong>Why </strong>
+                </em>
+                {proposal.why}
+              </em>
+              <hr />
+              <section id="comments-section">
+                <h6>Comments:</h6>
+                <div id="comment-wrapper"></div>
+              </section>
+            </CardBody>
+            <CardFooter>
+              <AddCommentForm
+                proposalId={proposal._id}
+                reloadComments={reloadComments}
+              />
+            </CardFooter>
           </Card>
         </Col>
       </Row>
