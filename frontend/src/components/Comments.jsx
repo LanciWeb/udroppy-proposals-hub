@@ -21,7 +21,7 @@ const Comments = props => {
               <img
                 height="40"
                 alt="profile"
-                ttle={c.user.nickname}
+                title={c.user.nickname}
                 src={c.user.picture}
                 className="image-fluid"
               />
@@ -30,10 +30,18 @@ const Comments = props => {
               <div>
                 <span className="nickname h6">{c.user.nickname}</span>
               </div>
-              <p className="mb-0 d-inline">{c.text}</p>
+              <p className="mb-0 d-inline">
+                {!c.isDeleted && c.text}
+                {c.isDeleted && (
+                  <span className="muted">
+                    <i className="fas fa-ban mx-1" />
+                    This comment has been removed
+                  </span>
+                )}
+              </p>
               <div className="timestamp">
                 {date} - {time}{' '}
-                {isCommentOwner && (
+                {isCommentOwner && !c.isDeleted && (
                   <DeleteCommentButton
                     proposalId={proposalId}
                     commentId={c._id}
@@ -61,6 +69,7 @@ Comments.propTypes = {
     PropTypes.shape({
       text: PropTypes.string.isRequired,
       user: PropTypes.object.isRequired,
+      isDeleted: PropTypes.bool.isRequired,
       created_at: PropTypes.string.isRequired
     })
   )

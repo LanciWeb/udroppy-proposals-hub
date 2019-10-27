@@ -64,7 +64,7 @@ const AddCommentPage = props => {
     <Container>
       <Row>
         <Col>
-          <Card className="h-100">
+          <Card className="mb-5">
             <CardHeader>
               <h3>{proposal.title}</h3>
             </CardHeader>

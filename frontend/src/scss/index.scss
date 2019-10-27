@@ -157,6 +157,10 @@ img[alt='profile'] {
     .comment {
       border-radius: 10px;
       background-color: white;
+      .muted {
+        color: #aaa;
+        font-style: italic;
+      }
     }
   }
 }
