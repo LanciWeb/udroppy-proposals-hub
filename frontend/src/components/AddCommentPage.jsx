@@ -17,23 +17,39 @@ import React, { useState, useEffect } from 'react';
 const AddCommentPage = props => {
   const { getTokenSilently } = useAuth0();
   const [proposal, setProposal] = useState();
+  const [comments, setComments] = useState([]);
+  const proposalId = props.match.params.id;
+  const apiUrl = process.env.API_URL || 'http://localhost:8081';
 
   const getProposal = async () => {
-    const params = props.match.params;
     const token = await getTokenSilently();
-    const apiUrl = process.env.API_URL || 'http://localhost:8081';
-    const response = await axios.get(apiUrl + '/proposals/' + params.id, {
+    const response = await axios.get(apiUrl + '/proposals/' + proposalId, {
       headers: {
         Authorization: `Bearer ${token}`
       }
     });
     const proposal = response.data;
     setProposal(proposal);
+    setComments(proposal.comments);
   };
 
-  const reloadComments = () => {
-    //TODO add api call to refetch the comments
-    alert('reloadComments!');
+  const getProposalComments = async () => {
+    const token = await getTokenSilently();
+    const response = await axios.get(
+      apiUrl + `/proposals/${proposalId}/comments`,
+      {
+        headers: {
+          Authorization: `Bearer ${token}`
+        }
+      }
+    );
+    const reloadedComments = response.data;
+    return reloadedComments;
+  };
+
+  const reloadComments = async () => {
+    reloadedComments = await getProposalComments();
+    setComments(comments);
   };
 
   // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -73,12 +89,14 @@ const AddCommentPage = props => {
               <hr />
               <section id="comments-section">
                 <h6>Comments:</h6>
-                <div id="comment-wrapper"></div>
+                <div id="comment-wrapper">
+                  <Comments comments={comments} />
+                </div>
               </section>
             </CardBody>
             <CardFooter>
               <AddCommentForm
-                proposalId={proposal._id}
+                proposalId={proposalId}
                 reloadComments={reloadComments}
               />
             </CardFooter>
