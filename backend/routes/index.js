@@ -98,4 +98,24 @@ module.exports = app => {
       console.error(e);
     }
   });
+
+  //add a comment to a specific proposal
+  app.post('/proposals/:id/comments', checkJwt, async (req, res) => {
+    const { user, comment } = req.body;
+    try {
+      const proposal = await Proposal.findOne({ _id: req.params.id });
+      if (!proposal) return res.status(404).send();
+      const newComment = {
+        user,
+        created_at: new Date(),
+        text: comment
+      };
+
+      proposal.comments.push(newComment);
+      await proposal.save();
+      res.status(201).send();
+    } catch (e) {
+      console.error(e);
+    }
+  });
 };
