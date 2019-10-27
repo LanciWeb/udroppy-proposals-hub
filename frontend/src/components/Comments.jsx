@@ -1,17 +1,18 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { useAuth0 } from '../auth/Auth0Provider';
+import DeleteCommentButton from './buttons/DeleteCommentButton';
 
 const Comments = props => {
-  const { comments } = props;
+  const { comments, proposalId, reloadComments } = props;
   const { user } = useAuth0();
   const renderComments = comments =>
     comments.map(c => {
       const dateTime = new Date(c.created_at);
       const time = dateTime.toLocaleTimeString();
       const date = dateTime.toLocaleDateString();
-      const directionClass =
-        user.sub === c.user.sub ? 'flex-row-reverse' : 'flex-row';
+      const isCommentOwner = user.sub === c.user.sub;
+      const directionClass = isCommentOwner ? 'flex-row-reverse' : 'flex-row';
 
       return (
         <div className="comment-wrapper mb-3" key={c._id}>
@@ -22,7 +23,7 @@ const Comments = props => {
                 alt="profile"
                 ttle={c.user.nickname}
                 src={c.user.picture}
-                className="image-fluid "
+                className="image-fluid"
               />
             </div>
             <div className="comment p-2 mx-2 flex-grow">
@@ -31,7 +32,14 @@ const Comments = props => {
               </div>
               <p className="mb-0 d-inline">{c.text}</p>
               <div className="timestamp">
-                {date} - {time}
+                {date} - {time}{' '}
+                {isCommentOwner && (
+                  <DeleteCommentButton
+                    proposalId={proposalId}
+                    commentId={c._id}
+                    reloadComments={reloadComments}
+                  />
+                )}
               </div>
             </div>
           </div>
@@ -47,6 +55,8 @@ const Comments = props => {
 };
 
 Comments.propTypes = {
+  proposalId: PropTypes.string.isRequired,
+  reloadComments: PropTypes.func.isRequired,
   comments: PropTypes.arrayOf(
     PropTypes.shape({
       text: PropTypes.string.isRequired,
