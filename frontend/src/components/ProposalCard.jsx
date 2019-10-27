@@ -94,11 +94,11 @@ const ProposalCard = props => {
 
 ProposalCard.propTypes = {
   proposal: PropTypes.shape({
-    _id: PropTypes.string,
-    who: PropTypes.string,
-    why: PropTypes.string,
-    what: PropTypes.string,
-    user: PropTypes.object,
+    _id: PropTypes.string.isRequired,
+    who: PropTypes.string.isRequired,
+    why: PropTypes.string.isRequired,
+    what: PropTypes.string.isRequired,
+    user: PropTypes.object.isRequired,
     likes: PropTypes.number
   }),
   reloadProposals: PropTypes.func

@@ -72,8 +72,8 @@ const AddCommentForm = props => {
 };
 
 AddCommentForm.propTypes = {
-  proposalId: PropTypes.string,
-  reloadComments: PropTypes.func
+  proposalId: PropTypes.string.isRequired,
+  reloadComments: PropTypes.func.isRequired
 };
 
 export default AddCommentForm;

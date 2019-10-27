@@ -10,6 +10,7 @@ import {
 } from 'reactstrap';
 import axios from 'axios';
 import Loader from './Loader';
+import Comments from './Comments';
 import AddCommentForm from './AddCommentForm';
 import { useAuth0 } from '../auth/Auth0Provider';
 import React, { useState, useEffect } from 'react';
@@ -48,8 +49,8 @@ const AddCommentPage = props => {
   };
 
   const reloadComments = async () => {
-    reloadedComments = await getProposalComments();
-    setComments(comments);
+    const reloadedComments = await getProposalComments();
+    setComments(reloadedComments);
   };
 
   // eslint-disable-next-line react-hooks/exhaustive-deps
