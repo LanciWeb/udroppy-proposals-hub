@@ -14,7 +14,6 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   background-image: url('https://app-ea.udroppy.com/assets/img/background/background_mobile.jpg');
-  // background-image: url('https://app-ea.udroppy.com/assets/img/background/background_login_orange.jpg');
 }
 
 code {
@@ -141,7 +140,23 @@ img[alt='profile'] {
   overflow-y: scroll;
   min-height: 150px;
   max-height: 300px;
-
   border-radius: 10px;
   background-color: #dedede;
+
+  /*   background-size: cover;
+  background-attachment: fixed;
+  background-image: url('https://app-ea.udroppy.com/assets/img/background/background_mobile.jpg');
+  background-image: url('https://app-ea.udroppy.com/assets/img/background/background_login_orange.jpg'); */
+  .comment-wrapper {
+    .timestamp {
+      font-size: 0.7em;
+      text-align: right;
+      font-style: italic;
+      color: lightgray;
+    }
+    .comment {
+      border-radius: 10px;
+      background-color: white;
+    }
+  }
 }
