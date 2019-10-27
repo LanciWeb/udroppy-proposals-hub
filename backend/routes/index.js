@@ -118,4 +118,16 @@ module.exports = app => {
       console.error(e);
     }
   });
+
+  //returns comments belonging to specific proposal
+  app.get('/proposals/:id/comments', checkJwt, async (req, res) => {
+    try {
+      const proposal = await Proposal.findOne({ _id: req.params.id });
+      if (!proposal) return res.status(404).send();
+
+      res.status(200).send(proposal.comments);
+    } catch (e) {
+      console.error(e);
+    }
+  });
 };
