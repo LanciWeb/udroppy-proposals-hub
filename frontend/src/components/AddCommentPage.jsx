@@ -20,14 +20,11 @@ const AddCommentPage = props => {
     const params = props.match.params;
     const token = await getTokenSilently();
     const apiUrl = process.env.API_URL || 'http://localhost:8081';
-    const response = await axios.get(
-      apiUrl + '/proposals/' + params.questionId,
-      {
-        headers: {
-          Authorization: `Bearer ${token}`
-        }
+    const response = await axios.get(apiUrl + '/proposals/' + params.id, {
+      headers: {
+        Authorization: `Bearer ${token}`
       }
-    );
+    });
     const proposal = response.data;
     setProposal(proposal);
   };
