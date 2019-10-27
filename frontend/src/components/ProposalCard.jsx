@@ -73,7 +73,7 @@ const ProposalCard = props => {
           <Link to={'/proposals/' + proposal._id}>
             <i className={`fas fa-comments mr-2`} />
           </Link>
-          <span>0</span>
+          <span>{proposal.comments.length}</span>
         </span>
         <span>
           <em>Proposed by: </em>
