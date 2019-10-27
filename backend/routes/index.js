@@ -130,4 +130,26 @@ module.exports = app => {
       console.error(e);
     }
   });
+
+  //soft deletes a single comment
+  app.delete(
+    '/proposals/:id/comments/:commentId',
+    checkJwt,
+    async (req, res) => {
+      try {
+        const proposal = await Proposal.findOne({ _id: req.params.id });
+        if (!proposal) return res.status(404).send();
+        const updatedComments = proposal.comments.map(c => {
+          if (c._id == req.params.commentId) c.isDeleted = true;
+          return c;
+        });
+
+        proposal.comments = updatedComments;
+        await proposal.save();
+        res.status(204).send();
+      } catch (e) {
+        console.error(e);
+      }
+    }
+  );
 };
