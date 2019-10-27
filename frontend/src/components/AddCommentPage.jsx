@@ -90,9 +90,7 @@ const AddCommentPage = props => {
               <hr />
               <section id="comments-section">
                 <h6>Comments:</h6>
-                <div id="comment-wrapper">
-                  <Comments comments={comments} />
-                </div>
+                <Comments comments={comments} />
               </section>
             </CardBody>
             <CardFooter>

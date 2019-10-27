@@ -26,6 +26,7 @@ const AddCommentForm = props => {
           }
         }
       );
+      return true;
     } catch (e) {
       console.error(e);
       return false;
@@ -36,8 +37,8 @@ const AddCommentForm = props => {
     if (comment) {
       const commentCreated = await postComment();
       if (commentCreated) {
-        props.reloadComments();
         setComment('');
+        props.reloadComments();
       }
     }
   };
